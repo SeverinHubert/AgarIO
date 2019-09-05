@@ -4,6 +4,7 @@ import com.julian.game.Entity;
 import com.julian.game.Food;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class MovementS {
     public static void move(Entity entity, float pseudoDeltaTime, Entity[] entities, Food[] food, int foodIndex, int width, int hight) {
@@ -45,19 +46,27 @@ public class MovementS {
         }
 
         if (distance[shortestDistanceIndex] == Integer.MAX_VALUE) {
-            float dx = entity.lastDx;
-            float dy = entity.lastDy;
-            if (entity.xPosition + entity.lastDx < 0 || entity.xPosition + entity.lastDx > width) {
-                dx = -entity.lastDx;
+            // Change Direction from time to time
+            Random rand = new Random();
+            if ((rand.nextInt(200) == 0)) {
+                float phi = phiArray[rand.nextInt(8)];
+                entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
+            } else {
+                float dx = entity.lastDx == 0 ? 1 : entity.lastDx;
+                float dy = entity.lastDy;
+                if (entity.xPosition + entity.lastDx < 0 || entity.xPosition + entity.lastDx > width) {
+                    dx = -entity.lastDx;
+                }
+                if (entity.yPosition + entity.lastDy < 0 || entity.yPosition + entity.lastDy > hight) {
+                    dy = -entity.lastDy;
+                }
+                entity.updatePosition(dx, dy, pseudoDeltaTime, width, hight);
             }
-            if (entity.yPosition + entity.lastDy < 0 || entity.yPosition + entity.lastDy > hight) {
-                dy = -entity.lastDy;
-            }
-            entity.updatePosition(dx, dy, pseudoDeltaTime, width, hight);
         } else {
 
             float phi = phiArray[shortestDistanceIndex];
             entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
+
         }
     }
 }

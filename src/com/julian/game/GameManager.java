@@ -158,28 +158,7 @@ public class GameManager extends AbstractGame {
     }
 
     public void moveEntity(Entity e, float dt) {
-
-        //TODO: Implement a function which calls
-        // 		e.updatePosition(float dx, float dy, dt, width, hight)
-        // 		dx is how far should the entity move in x-direction
-        // 		dy is how far should the entity move in y-direction
-        // 		Constrain: dx^2+dy^2 = 1
-        // 		Or compute the angle phi in which direction the entity should move
-        //		phi:  phi=0° move in positive x-direction, phi=90° move in negative y-direction
-        //		      phi=180° move in negative x-direction, phi=270° move in positive y-direction
-        //			  e.g. phi=20° move to the right and slightly up
-        // 			then use: dx = cos(phi)		dy = sin(phi)
-
-
         MovementS.move(e, dt, entities, food, foodIndex, width, hight);
-
-        // Change Direction from time to time
-        if (rand.nextInt(200) == 0) {
-            float phi = (float) (Math.PI * 2 * rand.nextDouble());
-            e.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), dt, width, hight);
-            return;
-        }
-
     }
 
 
