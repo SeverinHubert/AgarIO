@@ -46,14 +46,13 @@ public class MovementS {
         }
 
         if (distance[shortestDistanceIndex] == Integer.MAX_VALUE) {
-            // Change Direction from time to time
             Random rand = new Random();
             if ((rand.nextInt(200) == 0)) {
                 float phi = phiArray[rand.nextInt(8)];
                 entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
             } else {
-                float dx = entity.lastDx == 0 ? 1 : entity.lastDx;
-                float dy = entity.lastDy;
+                float dx = entity.lastDx == -1 ? 1 : entity.lastDx;
+                float dy = entity.lastDy == -1 ? 0 : entity.lastDy;
                 if (entity.xPosition + entity.lastDx < 0 || entity.xPosition + entity.lastDx > width) {
                     dx = -entity.lastDx;
                 }
@@ -63,7 +62,6 @@ public class MovementS {
                 entity.updatePosition(dx, dy, pseudoDeltaTime, width, hight);
             }
         } else {
-
             float phi = phiArray[shortestDistanceIndex];
             entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
 

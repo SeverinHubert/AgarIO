@@ -12,8 +12,8 @@ public class Entity {
     public Entity(int StartX, int StartY, int color) {
         xPosition = StartX;
         yPosition = StartY;
-        lastDx = 0;
-        lastDy = 0;
+        lastDx = -1;
+        lastDy = -1;
         this.color = color;
         size = 1000;
         V0 = (float) (170.0 * Math.sqrt(size));
