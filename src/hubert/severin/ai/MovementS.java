@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MovementS {
-    public static void move(Entity entity, float pseudoDeltaTime, Entity[] entities, Food[] food, int foodIndex, int width, int hight) {
+    public static void move(Entity entity, float pseudoDeltaTime, Entity[] entities, Food[] food, int foodIndex, int width, int height) {
 
         int numberOfRays = 8;
-        int rayLength = 25;
+        int rayLength = 100;
         float[] phiArray = new float[numberOfRays];
 
         for (int i = 0; i < numberOfRays; i++) {
@@ -49,21 +49,21 @@ public class MovementS {
             Random rand = new Random();
             if ((rand.nextInt(200) == 0)) {
                 float phi = phiArray[rand.nextInt(8)];
-                entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
+                entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, height);
             } else {
                 float dx = entity.lastDx == -1 ? 1 : entity.lastDx;
                 float dy = entity.lastDy == -1 ? 0 : entity.lastDy;
                 if (entity.xPosition + entity.lastDx < 0 || entity.xPosition + entity.lastDx > width) {
                     dx = -entity.lastDx;
                 }
-                if (entity.yPosition + entity.lastDy < 0 || entity.yPosition + entity.lastDy > hight) {
+                if (entity.yPosition + entity.lastDy < 0 || entity.yPosition + entity.lastDy > height) {
                     dy = -entity.lastDy;
                 }
-                entity.updatePosition(dx, dy, pseudoDeltaTime, width, hight);
+                entity.updatePosition(dx, dy, pseudoDeltaTime, width, height);
             }
         } else {
             float phi = phiArray[shortestDistanceIndex];
-            entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, hight);
+            entity.updatePosition((float) Math.cos(phi), (float) Math.sin(phi), pseudoDeltaTime, width, height);
 
         }
     }

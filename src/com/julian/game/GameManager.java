@@ -22,7 +22,7 @@ public class GameManager extends AbstractGame {
     private float foodTimer = (float) 2 / PLAYER_NUM;
     private int width = 1200, hight = 800;
     private float scale = 1f;
-    private float huntingRatio = (float) 1.3;
+    private float huntingRatio = (float) 1.25;
     private float foodT = 0;
 
 
@@ -141,7 +141,7 @@ public class GameManager extends AbstractGame {
                     yoff++;
                 }
             }
-            if (human == true && i == 0) {
+            if (human && i == 0) {
                 r.drawText("Me@ : " + entities[i].size, 6, 22 * (PLAYER_NUM - yoff) + 5, entities[i].color);
             } else {
                 r.drawText("COM" + i + ": " + entities[i].size, 6, 22 * (PLAYER_NUM - yoff) + 5, entities[i].color);
