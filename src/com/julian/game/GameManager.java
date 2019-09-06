@@ -24,6 +24,7 @@ public class GameManager extends AbstractGame {
     private float scale = 1f;
     private float huntingRatio = (float) 1.25;
     private float foodT = 0;
+    private float sizeLoss = (float) 0.3 / 60;
 
 
     public GameManager() {
@@ -49,6 +50,10 @@ public class GameManager extends AbstractGame {
 
     public void update(GameContainer gc, float dt) {
 
+        for (int i = 0; i < PLAYER_NUM; i++) {
+            entities[i].size -= entities[i].size * sizeLoss * dt;
+        }
+
         animationTrigger += 10 * dt;
         if (animationTrigger > 9) {
             animationTrigger -= 9;
@@ -60,6 +65,7 @@ public class GameManager extends AbstractGame {
         } else {
             moveEntity(entities[0], dt);
         }
+
 
         for (int i = 1; i < PLAYER_NUM; i++) {
             moveEntity(entities[i], dt);
